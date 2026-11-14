@@ -1,0 +1,6 @@
+{
+  "name": "NEON GALAXY // Void Striker",
+  "description": "An upgraded arcade space shooter featuring 6 game modes, 4 upgradeable starfighters, multi-phase boss battles, procedural Web Audio soundtrack, and responsive touch controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
