@@ -621,6 +621,28 @@ export function drawCoin(ctx: CanvasRenderingContext2D, c: CoinPickup, time: num
   ctx.restore();
 }
 
+function drawRoundedRectPath(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+): void {
+  const radius = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + w - radius, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+  ctx.lineTo(x + w, y + h - radius);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+  ctx.lineTo(x + radius, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
 export function drawBullet(ctx: CanvasRenderingContext2D, b: PooledBullet): void {
   ctx.save();
   ctx.shadowBlur = b.fromPlayer ? 12 : 10;
@@ -633,8 +655,7 @@ export function drawBullet(ctx: CanvasRenderingContext2D, b: PooledBullet): void
     ctx.fillStyle = b.isCrit ? '#fef08a' : '#ffffff';
     ctx.strokeStyle = b.color;
     ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.roundRect(-2.4, -10, 4.8, 20, 2.4);
+    drawRoundedRectPath(ctx, -2.4, -10, 4.8, 20, 2.4);
     ctx.fill();
     ctx.stroke();
   } else if (b.weapon === 'plasma') {
@@ -668,8 +689,7 @@ export function drawBullet(ctx: CanvasRenderingContext2D, b: PooledBullet): void
     ctx.fillStyle = '#ffffff';
     ctx.strokeStyle = b.color;
     ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.roundRect(-2.5, -14, 5, 28, 2.5);
+    drawRoundedRectPath(ctx, -2.5, -14, 5, 28, 2.5);
     ctx.fill();
     ctx.stroke();
   } else {
